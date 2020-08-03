@@ -1,0 +1,88 @@
+from tkinter import *
+from tkinter import messagebox
+from modHerramientas.cuitvalidaciones import validardni, validarsexo
+from modHerramientas.cuitformula import formula, pasedecuit
+import shelve
+
+
+# -------------------- FUNCIONES -----------------
+def ventanacuit():
+    root = Toplevel()
+    root.title("Herramientas - CUIT")
+    root.config(bg="snow")
+    root.geometry("400x250")
+
+    # --------- CONTENEDOR Y SECCIONES ---------
+    Contenedor = Frame(root)
+    Contenedor.pack()
+    Contenedor.config(pady=10, bg="snow")
+
+    Seccion_superior = Frame(Contenedor, bg="snow")
+    Seccion_superior.pack()
+    Seccion_media = Frame(Contenedor,bg="snow")
+    Seccion_media.pack()
+    Seccion_inferior = Frame(Contenedor,bg="snow")
+    Seccion_inferior.pack()
+    
+    # ---------  VARIABLES ----------
+    dni_var = StringVar()
+    sexo_var = IntVar(value=0)
+    cuit_var = StringVar()
+    
+    # 11111111111111 SECCION SUPERIOR 11111111111111111
+    # --------- ETIQUETAS Y LLENADO DE DATOS ----------
+    dnilabel = Label(Seccion_superior, text="Documento: ", padx=5, pady=5)
+    dnilabel.grid(row=1, column=0)
+    dni_entry = Entry(Seccion_superior, width=10, textvariable=dni_var)
+    dni_entry.grid(row=1, column=1)
+    dni_entry.focus()
+    
+    sexolabel = Label(Seccion_superior, text="Sexo: ", padx=5, pady=5)
+    sexolabel.grid(row=2, column=0)
+    sexo_Fem_radiobtn = Radiobutton(Seccion_superior, text="Fem.", variable=sexo_var, value=0)
+    sexo_Fem_radiobtn.grid(row=2, column=1)
+    sexo_Masc_radiobtn = Radiobutton(Seccion_superior, text="Masc.", variable=sexo_var, value=1)
+    sexo_Masc_radiobtn.grid(row=2, column=2)
+    
+    # 2222222222222 SECCION MEDIA 22222222222222
+    # ---------------- BOTONES -----------------
+    Limpiarbtn = Button(Seccion_media, width=10, borderwidth=4, relief=RAISED, text="Limpiar", highlightbackground="lightblue", command=lambda:limpiar(dni_var, sexo_var, cuit_var, dni_entry))
+    Limpiarbtn.grid(row=5, column=0, pady=30, padx=10)
+    
+    Calcularbtn = Button(Seccion_media, width=10, borderwidth=4, relief=RAISED, text="Calcular", highlightbackground="lightblue", command=lambda:calcularcuit(dni_var, sexo_var, cuit_var, dni_entry))
+    Calcularbtn.grid(row=5, column=1, pady=30, padx=10)
+
+    # 3333333333333 SECCION INFERIOR 33333333333333
+    # ----------------- VISOR ---------------------
+    cuitlabel = Label(Seccion_inferior, text="RESULTADO DE LA BÚSQUEDA")
+    cuitlabel.grid(row=0, column=0)
+    cuit_entry = Entry(Seccion_inferior, width=11, state="readonly", textvariable=cuit_var)
+    cuit_entry.grid(row=1, column=0)
+
+    # -------------- PROTEGER LA VENTANA SECUNDARIA -----------
+    root.grab_set()
+
+
+def limpiar(dni_var, sexo_var, cuit_var, dni_entry):
+    #print("Hasta acá llegamos a limpiar")
+    dni_var.set("")
+    sexo_var.set(value=0)
+    cuit_var.set("")
+    dni_entry.focus()
+
+
+def pasedecuit(cuit_var):
+    with shelve.open("modHerramientas/dbcuit") as db:
+        cuit = db["cuit"]        
+        cuit_var.set(cuit)
+        print("El valor del shelve transferido fue",cuit_var.get())
+        db.close()
+
+   
+def calcularcuit(dni_var, sexo_var,cuit_var, dni_entry):
+    if validardni(dni_var) and validarsexo(sexo_var):
+        formula(sexo_var, dni_var)
+        pasedecuit(cuit_var)
+    else:
+        limpiar(dni_var, sexo_var, cuit_var, dni_entry)
+
