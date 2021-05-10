@@ -1,11 +1,17 @@
 import shelve
-from tkinter import messagebox
+from tkinter import *
 
 
-def formula(sexo_var, dni_var):
+def pasedecuit(cuit):
+    with shelve.open("modClientes/Modelo/dbcuit") as db:
+        db["cuit"] = cuit
+        #print("El valor pasado al shelve es", cuit)
 
+
+def calculocuit(documento_var, sexo_var):
+    
+    dni = documento_var.get()
     sexo = sexo_var.get()
-    dni = dni_var.get()
 
     if sexo == int(1):
         dni = int(dni) + int(2000000000)
@@ -17,7 +23,8 @@ def formula(sexo_var, dni_var):
     aux = 0
     for i in range(10):
         aux += int(dni[i]) * base [i]
-    #print(aux)        
+    #print(aux)
+
     resto = aux % 11
     if resto == 0:    
         aux = 0
@@ -29,23 +36,17 @@ def formula(sexo_var, dni_var):
             aux = 9
             cuit = int(dni) + 300000000
             cuit = str(cuit) + str(aux)
+            #print(cuit)
         else:
             aux = 4
             cuit = int(dni) - 400000000
             cuit = str(cuit) + str(aux)
+            #print(cuit)
     else:
         aux = 11 - resto
-        cuit = dni + str(aux) 
-    # Salida desde el módulo
-    #print("La CUIT obtenida es en el módulo de la fórmula es:",cuit) 
-    messagebox.showinfo("Resultado Exitoso", "La CUIT obtenida es \n {}".format(cuit))
+        cuit = dni + str(aux)
+        #print(cuit) 
+    #print("La CUIT obtenida es en el módulo de la fórmula es:",cuit)
+   
     # Pase a la función que procesa el shelve
     pasedecuit(cuit)
-
-
-def pasedecuit(cuit):
-    with shelve.open("modHerramientas/dbcuit") as db:
-        db["cuit"] = cuit
-        #print("El valor del shelve a transferir es", cuit)
-
- 

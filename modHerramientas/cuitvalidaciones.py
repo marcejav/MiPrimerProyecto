@@ -21,7 +21,7 @@ def validardni(dni_var):
         return False
         
     else:
-        print("Validación de DNI Exitosa!")
+        #print("Validación de DNI Exitosa!")
         return True
 
 def validarsexo(sexo_var):
@@ -31,6 +31,6 @@ def validarsexo(sexo_var):
         messagebox.showerror("Error Género", "Es obligatorio la selección del Sexo")
         return False
     else:
-        print("Validación de Sexo Exitosa!")
+        #print("Validación de Sexo Exitosa!")
         return True
 
