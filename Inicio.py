@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from modHerramientas.Cuit import ventanacuit
 #from modClientes.ClienteControlador import ClienteControlador
 
+# Este es una prueba de git
 
 class MenuPrincipal:
 
