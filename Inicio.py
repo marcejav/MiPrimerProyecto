@@ -1,9 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from modHerramientas.Cuit import ventanacuit
-#from modClientes.ClienteControlador import ClienteControlador
-
-# Este es una prueba de git
+from modClientes.ClienteControlador import ClienteControlador
 
 class MenuPrincipal:
 
@@ -30,8 +28,8 @@ class MenuPrincipal:
         
 
         # 3. Crear los Comandos de los Menús
-        #self.menuClientes.add_command(label="Gestion de Clientes", command=ClienteControlador)
-        self.menuClientes.add_command(label="Gestion de Clientes")
+        self.menuClientes.add_command(label="Manager de Clientes", command=ClienteControlador(self.root))
+        #self.menuClientes.add_command(label="Gestion de Clientes")
         
         self.menuOperacion.add_command(label="Gestión de Operaciones")
         
@@ -55,6 +53,7 @@ class MenuPrincipal:
 
         # 5. Indicamos que la barra de menús estará en la ventana
         self.root.config(menu=self.barMenu)
+
 
 if __name__ == '__main__':
     raiz = Tk()

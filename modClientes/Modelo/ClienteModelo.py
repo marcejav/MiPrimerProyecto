@@ -38,7 +38,7 @@ def pasandocuit(cuit):
 # ### CREAR BASE DE DATOS CON PEEWEE ####
 # #######################################
 
-db = SqliteDatabase('/Users/marcelo/Desktop/Sistema-Mutual/BaseMutual.db')
+db = SqliteDatabase('./BaseMutual.db')
 
 class Cliente(Model):
     denominacion = CharField()
