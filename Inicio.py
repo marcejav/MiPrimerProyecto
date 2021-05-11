@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from modHerramientas.Cuit import ventanacuit
-from modClientes.ClienteControlador import ClienteControlador
+#from modClientes.ClienteControlador import ClienteControlador
 
 class MenuPrincipal:
 
@@ -28,8 +28,8 @@ class MenuPrincipal:
         
 
         # 3. Crear los Comandos de los Menús
-        self.menuClientes.add_command(label="Manager de Clientes", command=ClienteControlador(self.root))
-        #self.menuClientes.add_command(label="Gestion de Clientes")
+        #self.menuClientes.add_command(label="Manager de Clientes", command=ClienteControlador)
+        self.menuClientes.add_command(label="Gestion de Clientes")
         
         self.menuOperacion.add_command(label="Gestión de Operaciones")
         
