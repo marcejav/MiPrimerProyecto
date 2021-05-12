@@ -1,6 +1,6 @@
 from tkinter import *
-from modHerramientas.Cuitvalidaciones import validardni, validarsexo
-from modHerramientas.Cuitformula import formula
+from modHerramientas.cuitvalidaciones import validardni, validarsexo
+from modHerramientas.cuitformula import formula
 import shelve
 
 

@@ -1,6 +1,6 @@
 from tkinter import *
 from PIL import Image, ImageTk
-from modHerramientas.Cuit import ventanacuit
+from modHerramientas.cuit import ventanacuit
 ### Se comentó lineas 5 y 32 para por lo menos usar módulos sin integrar
 #from modClientes.ClienteControlador import ClienteControlador
 
