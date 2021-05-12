@@ -4,7 +4,7 @@ from tkinter import *
 #from modClientes.Vista.ClienteVista import Vista
 #from modClientes.Modelo.ClienteModelo import Modelo
 
-# Opción Individual
+# Opción Individual (no conectada al menú principal Inicio.py)
 from Vista.ClienteVista import Vista
 from Modelo.ClienteModelo import Modelo
 

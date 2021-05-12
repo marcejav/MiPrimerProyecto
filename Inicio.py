@@ -1,13 +1,14 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from modHerramientas.Cuit import ventanacuit
+### Se comentó lineas 5 y 32 para por lo menos usar módulos sin integrar
 #from modClientes.ClienteControlador import ClienteControlador
 
 class MenuPrincipal:
 
     def __init__(self, raiz):
         self.root = raiz
-        self.root.title("Sistema Backend Financiero")
+        self.root.title("Sistema de Préstamos")
         canvas = Canvas(raiz, width="800", height="600")
         canvas.grid(columnspan=4)
         logo = Image.open('Logo-mutual.png')
@@ -29,10 +30,9 @@ class MenuPrincipal:
 
         # 3. Crear los Comandos de los Menús
         #self.menuClientes.add_command(label="Manager de Clientes", command=ClienteControlador)
-        self.menuClientes.add_command(label="Gestion de Clientes")
+        self.menuClientes.add_command(label="ABMC de Clientes")
         
         self.menuOperacion.add_command(label="Gestión de Operaciones")
-        
         self.menuCobranza.add_command(label="Depuración")
         self.menuCobranza.add_command(label="Imputación Masiva")
         self.menuCobranza.add_command(label="Imputación Manual")
